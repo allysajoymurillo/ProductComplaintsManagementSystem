@@ -1,0 +1,240 @@
+   
+using System;
+using System.Collections.Generic;
+
+namespace ProductComplaintsManagementSystem
+{
+
+class Program 
+   {
+     public static List<Product> productsList = new List<Product>();
+     
+     static void Main(String[] args)
+      { 
+          Instantiate();
+          
+                bool ShowMenu = true;
+
+                  while (ShowMenu)
+                    {
+                       ShowMenu = MainMenu();
+                         }
+                  }
+
+                //
+   
+              Create some hard coded dummy Products 
+               
+                 static void Instantiate()
+           {
+             Product noodles = new Product("Lucky Me! Beef", "0003156", "Instant Noodles", 1000);
+                     productsList.Add(noodles);
+             Product cornedbeef = new Product("Argentina Corned Beef", "0000153", "Can Goods", 800);
+                     productList.Add(cornedbeef);
+             Product sardines = new Product("Mega Extra Hot Sardines", "0003318", "Can Goods", 900);
+                     productList.Add(sardines);
+          }
+            
+                static void ShowAvailableProducts(boolwithIndex)
+                  {
+                     if (withIndex == true)
+                      {
+                     for (int i = 0; i < productsList.Count; i++)
+                       {
+                         Console.WriteLine($"{i}\t {productsList[i].ProductName}");
+                     }
+                 } else 
+                   { 
+                     for (int i = 0; i < productsList.Count; i++)
+                       {
+                          Console.WriteLine($"{productsList[i].ProductName}");
+               }      
+            }
+
+         }
+      
+              static bool MainMenu()
+        {
+           Console.Clear();
+           Console.WriteLine("Main");
+           Console.WriteLine("Welcome to Product Complaints Management System");
+           Console.WriteLine("Available products: ");
+                 ShowAvailableProducts(false);
+           Console.WriteLine(); 
+           Console.WriteLine("Please type: ");
+           Console.WriteLine("or \'q\' to quit");
+           Console.WriteLine("or \'s\' to select a product");
+           Console.WriteLine();
+           Console.Write("INPUT: ");
+     
+           switch (Console.ReadLine().ToLower())
+              {
+                  case "q":
+                        return false;
+                  case "s":
+                         bool showSecondMenu = true
+            
+                         while(showSecondMenu)
+                            {
+                               showSecondMenu = ShowSecondMenu();
+                                }
+                                 
+                                     return true;
+                                          default:
+                                     return true;
+                                     }
+           
+                                   }
+
+                              static bool ShowSecondMenu()
+                                 {
+                                    Console.Clear();
+                                    Console.WriteLine("Main > Product Select");
+                                    Console.WriteLine("==========PRODUCT SELECT MODE==========");
+                                    Console.WriteLine("Index\t Product");
+                                    ShowAvailabkeProducts(true);
+                                    Console.WriteLine();
+                                    Console.WriteLine("Please type the index number of the products");
+                                    Console.WriteLine("\'b\' to go back");
+                                    Console.WriteLine();
+                                    Console.WriteLine("INPUT: ");
+                                        
+     
+                               switch (Console.ReadLine().ToLower())
+                                 {
+                                   case "0":
+                                        {
+
+                                             bool showThirdMenu = true;
+
+                                             while (showThirdMenu)
+                                             {
+                                                   showThirdMenu = ShowThirdMenu(0);
+                                               }
+                                   
+                                                   return true;
+                                         }
+                                     case "1":
+                                          {
+                                              bool showThirdMenu = true;
+
+                                              while (showThirdMenu)
+                                                {
+                                                     showThirdMenu = ShowThirdMenu(1);
+                                                       }
+                                                          return true;
+                                                            }
+                                                              case "2":
+                                          {
+                                              bool showThirdMenu = true;
+
+                                              while (showThirdMenu)
+                                                {
+                                                     showThirdMenu = ShowThirdMenu(2);
+                                                       }
+                                                          return true;
+                                                            }
+                                                              
+                                                                 case "b":
+                                                                       return false;
+                                                                 default:
+                                                                       return true;
+                                                                     }
+
+                                                                    }
+           
+                                                                     static bool ShowThirdMenu(int index)
+                                                                        {
+                                                                         Console.Clear();
+                                                                         Console.WriteLine("Main > Product Select > Product Information");
+                                                                         Console.WriteLine("==========PRODUCT INFORMATION==========");
+                                                                         Console.WriteLine($"Product Brand: {productsList[index].ProductBrand}");
+                                                                         Console.WriteLine($"Product Code: {productsList[index].ProductCode}");
+                                                                         Console.WriteLine($"Product Name: {productsList[index].ProductName}");
+                                                                         Console.WriteLine($"Product Quantity: {productsList[index].ProductQuantity}");
+                                                                         Console.WriteLine("Product Complaints: ");
+                                                                  
+                                                           List<ProductComplaint> productComplaints = productsList[index].GetComplaints();
+                                                                
+                                                              if (productComplaints.Count == 0)
+                                                                  {
+                                                                    Console.WriteLine("No Complaints about this product");
+                                                                  }
+                                                                   
+                                                                    for (int i = 0; i < productComplaints.Count; i++)
+                                                                      {
+                                                                         Console.WriteLine($"{i + 1}.{productComplaints[i].GetAllInfo()}";
+                                                                         }
+
+                                                                           Console.WriteLine();
+                                                                           Console.WriteLine("Please type: ");
+                                                                           Console.WriteLine("\'a\' add a complaint");
+                                                                           Console.WriteLine("\'b\' to go back");
+                                                                           Console.WriteLine();
+                                                                           Console.WriteLine("INPUT: "); 
+                                           
+       
+                                                    switch (Console.ReadLine().ToLower())
+                                            {
+
+                                           case "a":
+                                               {
+
+                                                 bool showFourthMenu = true;
+
+                                                   while (showFourthMenu)
+                                                     {
+                                                          showFourthMenu = ShowFourthMenu(index);
+                                                       }
+                                      
+                                                         return false;
+                                                }
+          
+                                                  case "b":
+                                                      return false;
+                                                   default:
+                                                      return true;
+                                                        }
+
+                                                    }
+           
+                                                            static bool ShowFourthMenu(int index)
+                                                                  {
+                                                                         Console.Clear();
+                                                                         Console.WriteLine("Main > Product Select > Product Information > Add Complaint");
+                                                                         Console.WriteLine("==========ADD PRODUCT COMPLAINT==========");
+                                                                         Console.Write("Enter name; ");
+                                                                            string complaintName = Console.ReadLine();
+                                                                         Console.Write("Enter complaint: ");
+                                                                            string complaintContent = Console.ReadLine();
+
+                                                                         ProductComplaint complaint = new ProductComplaint(complaintName, DateTime.Now, complaintContent);
+
+                                                                            productsList[index].AddComplaint(complaint);
+
+                                                                          Console.WriteLine("Complaint successfully added");
+                                                                          Console.ReadLine();
+
+
+                                                                                   return false;
+
+                                                                               }
+      
+                                                                             }
+
+                                                                          }
+
+      
+
+
+
+
+
+
+
+
+                 
+
+          
+           
+
